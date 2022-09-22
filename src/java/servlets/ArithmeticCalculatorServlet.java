@@ -30,8 +30,40 @@ public class ArithmeticCalculatorServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        int fistNum = Integer.parseInt(request.getParameter("fistNum"));
-        int secondNum = Integer.parseInt(request.getParameter("secondNum"));
+        // get values from the form
+        String fisrtNumString = request.getParameter("firstNum");
+        String secondNumString = request.getParameter("secondNum");
+        String output = "---";
+        
+        // keep entered values
+        request.setAttribute("firstNum", fisrtNumString);
+        request.setAttribute("secondNum", secondNumString);
+        
+        // if left empty.
+        if (fisrtNumString.equals("") || fisrtNumString == null || secondNumString.equals("") || secondNumString == null) {
+            output = "invalid"; // display result
+            request.setAttribute("output", output);
+            getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request, response);
+            return;
+        }
+        
+        int firstNum = Integer.parseInt(fisrtNumString);
+        int secondNum = Integer.parseInt(secondNumString);
+        String operation = request.getParameter("operation");
+        
+        
+        
+        if (operation.equals("+")) {
+            output = Integer.toString(firstNum + secondNum);
+        } else if (operation.equals("-")) {
+            output = Integer.toString(firstNum - secondNum);
+        } else if (operation.equals("*")) {
+            output = Integer.toString(firstNum * secondNum);
+        } else if (operation.equals("%")) {
+            output = Integer.toString(firstNum % secondNum);
+        }
+        
+        request.setAttribute("output", output);
         
         getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request, response);
     }
