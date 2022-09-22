@@ -12,6 +12,16 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>arithmetic calculator</h1>
+        <h1>Arithmetic Calculator</h1>
+        <form method="POST" action="arithmetic">
+            First <input type="number" name="fistNum" value="${fistNum}" step="1"><br>
+            Second <input type="number" name="secondNum" value="${secondNum}" step="1"><br>
+            <input type="submit" name="operation" value="+">
+            <input type="submit" name="operation" value="-">
+            <input type="submit" name="operation" value="*">
+            <input type="submit" name="operation" value="%">
+        </form>
+        <p>Result: ${output}</p>
+        <p><a href="age">Age Calculator</a></p>
     </body>
 </html>
